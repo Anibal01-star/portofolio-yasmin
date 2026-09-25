@@ -1,8 +1,25 @@
 import React from "react";
-import { SylvaHero } from "@designcodeio/threeui";
+import { SylvaHero as SylvaHeroBase } from "@designcodeio/threeui";
 import "@designcodeio/threeui/style.css";
 import { ArrowDown, MessageCircle, Sparkles } from "lucide-react";
 import { yasminProfile } from "../data/yasmin";
+
+// Type cast: the published @designcodeio/threeui type defs may lag behind the
+// actual runtime API. SylvaHero accepts `variant` at runtime; we widen the
+// prop type here so tsc does not reject it on Vercel's clean install.
+const SylvaHero = SylvaHeroBase as React.ComponentType<{
+  variant?: "living-green" | "sakura-sunset" | "maple-autumn" | "sequoia-mist";
+  headingFont?: string;
+  bodyFont?: string;
+  headingWeight?: string;
+  bodyWeight?: string;
+  primaryColor?: string;
+  headingSize?: number;
+  bodySize?: number;
+  headingLetterSpacing?: number;
+  className?: string;
+  style?: React.CSSProperties;
+}>;
 
 export const Hero: React.FC = () => {
   const scrollTo = (id: string) => {
